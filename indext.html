@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MWCNU Cimahi Selatan — Situs Resmi</title>
+  <meta name="description" content="MWCNU Cimahi Selatan — Berita, Kegiatan, Agenda, dan Informasi resmi Nahdlatul Ulama Kota Cimahi" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --nu-green:#207b35;
+    --nu-green-dark:#0e5822;
+    --nu-gold:#f5c400;
+    --bg:#f6faf6;
+    --muted:#6b6b6b;
+    --white: #ffffff;
+    --glass: rgba(255,255,255,0.86);
+    --radius: 14px;
+    --max-width:1180px;
+    font-family: 'Inter', system-ui, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:#111;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+  /* HEADER */
+  header{position:sticky;top:0;z-index:1000;background:linear-gradient(90deg,rgba(255,255,255,0.96),rgba(245,245,245,0.92));backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo img{height:72px;width:auto;display:block}
+  .brand h1{font-size:18px;margin:0}
+  .brand small{display:block;color:var(--muted);font-size:12px}
+
+  nav ul{list-style:none;display:flex;gap:10px;align-items:center}
+  nav li a{padding:8px 12px;border-radius:10px;font-weight:600}
+  nav li a:hover{background:rgba(32,123,53,0.06)}
+  .btn-cta{background:var(--nu-green);color:var(--white);padding:8px 14px;border-radius:10px;font-weight:700}
+
+  .menu-toggle{display:none;border:0;background:none;font-size:22px;cursor:pointer}
+  @media(max-width:880px){
+    nav ul{position:absolute;right:20px;top:70px;padding:14px;background:var(--white);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);flex-direction:column;width:220px;display:none}
+    nav ul.open{display:flex}
+    .menu-toggle{display:block}
+  }
+
+  /* HERO */
+  .hero{margin-top:18px;display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+  @media(max-width:980px){.hero{grid-template-columns:1fr}}
+
+  .hero-card{background:linear-gradient(180deg,var(--white),#fbfffb);border-radius:18px;padding:28px;box-shadow:0 10px 34px rgba(0,0,0,0.06)}
+  .hero-title{font-size:28px;margin-bottom:8px}
+  .hero-desc{color:var(--muted);max-width:78%}
+
+  /* Slider */
+  .slider{position:relative;border-radius:14px;overflow:hidden}
+  .slides{display:flex;transition:transform .5s ease}
+  .slide{min-width:100%;padding:18px 20px;display:flex;gap:18px;align-items:center}
+  .slide .info{flex:1}
+  .slide img{width:320px;height:200px;object-fit:cover;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+  .slider-controls{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;align-items:center}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.06)}
+  .dot.active{background:var(--nu-gold);border-color:transparent}
+
+  /* GRID */
+  section{padding:44px 0}
+  h2{font-size:20px;margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--white);padding:16px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.04)}
+  .news-card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+  .news-meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+
+  /* SIDEBAR */
+  .sidebar .card{margin-bottom:14px}
+
+  /* SEARCH */
+  .search-row{display:flex;gap:8px;align-items:center}
+  .search-row input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
+  .search-row button{padding:10px 12px;border-radius:8px;border:0;background:var(--nu-green);color:white}
+
+  /* ARTICLE LIST */
+  .list-article{display:flex;gap:12px;align-items:flex-start}
+  .list-article img{width:150px;height:100px;object-fit:cover;border-radius:8px}
+  .list-article h3{margin-bottom:6px}
+
+  /* TAGS (Trending) */
+  .tags-grid{display:flex;flex-wrap:wrap;gap:10px}
+  .tag-btn{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(32,123,53,0.06);border:1px solid rgba(32,123,53,0.06);cursor:pointer;font-weight:600}
+  .tag-btn.active{background:var(--nu-green);color:white;border-color:var(--nu-green)}
+  .tag-count{font-size:12px;color:var(--muted);padding-left:6px}
+
+  /* tag cloud sizes */
+  .tag-size-1{font-size:13px}
+  .tag-size-2{font-size:15px}
+  .tag-size-3{font-size:17px}
+  .tag-size-4{font-size:19px}
+
+  /* PAGINATION */
+  .pagination{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:18px}
+  .pagination button{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:white}
+
+  /* FOOTER */
+  footer{background:var(--nu-green-dark);color:white;padding:28px 0;margin-top:24px}
+  footer a{color:rgba(255,255,255,0.95)}
+  .footer-flex{display:flex;justify-content:space-between;gap:20px;align-items:center}
+  @media(max-width:880px){.footer-flex{flex-direction:column;align-items:flex-start}}
+
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:.18s}
+  .modal.open{opacity:1;pointer-events:auto}
+  .dialog{background:white;padding:18px;border-radius:12px;width:100%;max-width:640px;max-height:80vh;overflow:auto}
+  input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);margin-top:8px}
+
+  /* Back to top */
+  .back-to-top{position:fixed;right:18px;bottom:18px;background:var(--nu-green);color:white;border:0;padding:12px;border-radius:999px;display:none;box-shadow:0 10px 24px rgba(0,0,0,0.18)}
+  .back-to-top.show{display:block}
+
+  /* helpers */
+  .muted{color:var(--muted)}
+  .k-pill{display:inline-block;background:rgba(245,196,0,0.14);color:var(--nu-green-dark);padding:6px 10px;border-radius:999px;font-weight:700}
+
+  /* small visuals */
+  .meta-row{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">
+          <!-- replace with your logo image file -->
+          <img src="Logo MWC NU.png" alt="Logo NU" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <h1 style="font-size:18px;">MWCNU CIMAHI SELATAN</h1>
+          <small>Nahdlatul Ulama • Kota Cimahi</small>
+        </div>
+      </div>
+
+      <nav>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul id="navList">
+          <li><a href="#home" class="navlink active">Beranda</a></li>
+          <li><a href="#tentang" class="navlink">Tentang</a></li>
+          <li><a href="#kegiatan" class="navlink">Kegiatan</a></li>
+          <li><a href="#berita" class="navlink">Berita</a></li>
+          <li><a href="#kontak" class="navlink">Kontak</a></li>
+          <li><a class="btn-cta" id="donateBtn" href="#">Donasi</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero">
+      <div class="hero-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+          <div>
+            <div class="hero-title"><b>Selamat Datang di MWCNU Cimahi Selatan</b></div>
+            <div class="hero-desc muted">Menguatkan ukhuwah, memajukan pendidikan, dan melayani masyarakat dengan semangat Ahlussunnah wal Jama'ah.</div>
+
+            <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn-cta" href="#kegiatan">Lihat Kegiatan</a>
+              <span class="k-pill">Aktif • Program Tahunan</span>
+            </div>
+          </div>
+
+          <div style="min-width:220px;text-align: left">
+            <div class="muted" style="font-size:13px"><b>Agenda Selanjutnya</b></div>
+            <strong>LAILATUL IJTIMA</strong>
+            <div style="margin-top:6px;color:var(--muted)">Sabtu, 20 Desember 2025 • Ranting Melong</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <!-- SMALL NEWS STRIP -->
+          <div style="display:flex;gap:10px;overflow:auto;padding-bottom:4px">
+            <div class="card" style="min-width:260px;flex:0 0 auto">Pengumuman: Lailatul Ijtima Bulan Ini dilaksanakan di tempat Syuriah Ranting Melong.</div>
+            <div class="card" style="min-width:260px;flex:0 0 auto">Berita: Pengukuhan Pengurus MWCNU dan Ranting Cimahi Selatan.</div>
+            <div class="card" style="min-width:260px;flex:0 0 auto">Event: Seminar Moderasi Beragama.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO SLIDER / PROMO -->
+      <aside class="slider card" aria-label="slider">
+        <div class="slides" id="slides">
+          <!-- slides will be injected by JS -->
+        </div>
+
+        <div class="slider-controls">
+          <div style="display:flex;gap:8px">
+            <button class="btn" id="prev">◀</button>
+            <button class="btn" id="next">▶</button>
+          </div>
+          <div class="dots" id="dots"></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- TENTANG -->
+    <section id="tentang">
+      <h2>Tentang Kami</h2>
+      <p class="muted" style="max-width:900px;margin-bottom:14px">MWCNU Cimahi Selatan adalah organisasi yang bergerak di bidang keagamaan, pendidikan, sosial, dan kebudayaan. Berpegang pada tradisi Nahdlatul Ulama, kami bekerja sama dengan masyarakat untuk menumbuhkembangkan kesejahteraan dan ketakwaan.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Visi</h4>
+          <p class="muted">Menjadi gerakan yang berwawasan kebangsaan, inklusif, dan berkontribusi bagi pembangunan lokal.</p>
+        </div>
+        <div class="card">
+          <h4>Misi</h4>
+          <p class="muted">Meningkatkan kualitas pendidikan keagamaan, pemberdayaan ekonomi, dan layanan sosial.</p>
+        </div>
+        <div class="card">
+          <h4>Struktur</h4>
+          <p class="muted">Ketua : Kyai M. Abidullah Dadang, S.Pd,<br> Rois : KH. Kgs. Akbar Saman, M.Pd,<br> Sekretaris : Hendro Kartika J., M.Hum,<br> Bendahara : Ustadz Rasto,<br> dan beberapa bidang: Pendidikan, Dakwah, Kaderisasi, Sosial.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEGIATAN + BERITA GRID -->
+    <section id="kegiatan">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start">
+        <div>
+          <h2>Kegiatan & Berita Terbaru</h2>
+
+          <!-- SEARCH -->
+          <div style="margin-bottom:12px;display:flex;gap:12px;align-items:center">
+            <div class="search-row" style="flex:1">
+              <input type="search" id="search" placeholder="Cari berita, kegiatan, atau pengumuman...">
+              <button id="searchBtn">Cari</button>
+            </div>
+            <select id="filterCategory" style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <option value="all">Semua Kategori</option>
+              <option value="kegiatan">Kegiatan</option>
+              <option value="pengumuman">Pengumuman</option>
+              <option value="pendidikan">Pendidikan</option>
+            </select>
+          </div>
+
+          <div id="articles" class="grid" style="margin-top:6px">
+            <!-- articles injected by JS -->
+          </div>
+
+          <div class="pagination" id="pagination"></div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="card">
+            <h4>Kontak Cepat</h4>
+            <p class="muted">Jl. Mukodar 297 RT. 03 RW. 03, Kel. Cibeureum, Kec. Cimahi Selatan, Kota Cimahi<br>Email: <strong>mwcnu.cimsel@gmail.com</strong><br>Telp: 0896-56283826</p>
+            <button class="btn" id="openContact2">Kirim Pesan</button>
+          </div>
+
+          <div class="card">
+            <h4>Trending Tags</h4>
+            <div id="trendingTags" class="tags-grid" style="margin-top:8px">
+              <!-- tags injected by JS -->
+            </div>
+            <div style="margin-top:10px">
+              <button id="clearTag" class="btn" style="padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:white">Clear Filter</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>Agenda Mendatang</h4>
+            <ul style="margin-top:8px;list-style:none;display:flex;flex-direction:column;gap:8px;padding-left:0">
+              <li><strong>15 Des 2025</strong> • Kajian Rutin</li>
+              <li><strong>20 Des 2025</strong> • Lailatul Ijtima</li>
+              <li><strong>05 Jan 2026</strong> • Pelatihan Dakwah</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>Kategori Populer</h4>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <a href="#" data-cat="kegiatan" class="k-pill">Kegiatan</a>
+              <a href="#" data-cat="pengumuman" class="k-pill">Pengumuman</a>
+              <a href="#" data-cat="pendidikan" class="k-pill">Pendidikan</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <h2>Hubungi Kami</h2>
+      <div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:260px">
+          <p class="muted">Alamat kantor dan sekretariat MWC NU Cimahi Selatan.</p>
+          <p><strong>Jl. Mukodar No. 297 RT. 03 RW. 03 Kel. Cibeureum, Kec. Cimahi Selatan, Kota Cimahi</strong></p>
+          <p class="muted">Email: mwcnu.cimsel@gmail.com</p>
+          <p class="muted">Telepon: 0896-56283826</p>
+        </div>
+
+        <div style="flex:1;min-width:300px">
+          <iframe title="peta" src="https://maps.google.com/maps?q=cimahi&t=&z=13&ie=UTF8&iwloc=&output=embed" style="width:100%;height:220px;border:0;border-radius:10px"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-flex">
+        <div>
+          <strong>MWCNU CIMAHI SELATAN</strong>
+          <div style="font-size:13px;color:rgba(255,255,255,0.9)">Membangun umat, mewarnai negeri.</div>
+        </div>
+        <div style="font-size:13px">&copy; 2025 MWCNU Cimahi Selatan</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="modalContact">
+    <div class="dialog">
+      <h3>Hubungi Kami</h3>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Nama" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" rows="4" placeholder="Pesan Anda..." required></textarea>
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:10px">
+          <button class="btn" id="closeModal" type="button">Batal</button>
+          <button class="btn btn-cta" type="submit">Kirim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="toTop">↑</button>
+
+  <script>
+    /* ---------------- NAV ---------------- */
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle?.addEventListener('click', () => navList.classList.toggle('open'));
+
+    document.querySelectorAll('.navlink').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth'});
+        document.querySelectorAll('.navlink').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        navList.classList.remove('open');
+      })
+    });
+
+    /* --------------- SLIDER (HERO) --------------- */
+    const slidesEl = document.getElementById('slides');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const dotsWrap = document.getElementById('dots');
+    let idx = 0;
+
+    // sample featured slides (replace src with real images)
+    const featured = [
+      {title:'Bimbingan Keislaman', desc:'Sosialisasi dan bimbingan keislaman pada masyarakat.', img:'images/1.jpg'},
+      {title:'Seminar Moderasi Beragama', desc:'Menguatkan toleransi dan wawasan kebangsaan.', img:'images/2.jpg'},
+      {title:'Program Pendidikan', desc:'Pelatihan guru madrasah dan beasiswa pesantren.', img:'images/3.jpeg'}
+    ];
+
+    function renderSlides(){
+      slidesEl.innerHTML = '';
+      dotsWrap.innerHTML = '';
+      featured.forEach((s,i)=>{
+        const slide = document.createElement('div'); slide.className='slide';
+        slide.innerHTML = `<div class="info"><h3 style="margin-bottom:6px">${s.title}</h3><p class="muted">${s.desc}</p></div><img src="${s.img}" alt="${s.title}">`;
+        slidesEl.appendChild(slide);
+
+        const d = document.createElement('div'); d.className='dot'; if(i===0) d.classList.add('active'); d.dataset.i = i; dotsWrap.appendChild(d);
+        d.addEventListener('click', ()=>{ idx = i; updateSlider(); });
+      });
+    }
+
+    function updateSlider(){
+      slidesEl.style.transform = `translateX(${-idx*100}%)`;
+      document.querySelectorAll('.dot').forEach((dd,ii)=> dd.classList.toggle('active', ii===idx));
+    }
+
+    prev?.addEventListener('click', ()=>{ idx = (idx-1+featured.length)%featured.length; updateSlider(); });
+    next?.addEventListener('click', ()=>{ idx = (idx+1)%featured.length; updateSlider(); });
+    setInterval(()=>{ idx = (idx+1)%featured.length; updateSlider(); }, 6000);
+
+    renderSlides();
+
+    /* --------------- DYNAMIC ARTICLES (SIMULATED) --------------- */
+    // Sample data: in real site, fetch from CMS / API
+    const sampleArticles = [
+      {id:1,title:'Bakti Sosial: Santunan Untuk Warga',date:'2025-12-12',cat:'kegiatan',tags:['sosial','sedekah'],img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiWk80F7N3ioxhXVToQ0tIDm1sW2Ko1opLig&s',excerpt:'Tim MWCNU Cimahi Selatan mengadakan pembagian sembako kepada keluarga terdampak.'},
+      {id:2,title:'Pendaftaran Kaderisasi Dibuka',date:'2025-12-01',cat:'pengumuman',tags:['kader','pendaftaran'],img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsIbgFN7nM9YacZdfu5bHyhjjkU051KQjvTQ&s',excerpt:'Program kaderisasi untuk pemuda usia 18–30 tahun, pelatihan kepemimpinan dan dakwah.'},
+      {id:3,title:'Pelatihan Guru Madrasah',date:'2025-11-25',cat:'pendidikan',tags:['pelatihan','pendidikan'],img:'images/1.jpg',excerpt:'Workshop peningkatan kualitas pengajaran di madrasah sekitar Cimahi.'},
+      {id:4,title:'Pengukuhan Pengurus MWCNU',date:'2025-11-05',cat:'kegiatan',tags:['pengukuhan','organisasi'],img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_z9KS0vvUrm8CPZVO3bakJchUKzYMH9Wqxw&s',excerpt:'Pengukuhan pengurus baru untuk masa bakti 2025–2028.'},
+      {id:5,title:'Seminar Moderasi Beragama',date:'2025-10-20',cat:'pendidikan',tags:['seminar','moderasi'],img:'images/2.jpg',excerpt:'Seminar tentang pentingnya moderasi beragama untuk perdamaian sosial.'},
+      {id:6,title:'Donasi Pembangunan Madrasah',date:'2025-10-02',cat:'pengumuman',tags:['donasi','sosial'],img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUOz48qPcsq9oWCqmqwopOWgbDMiHpx0ctbw&s',excerpt:'Ajakan donasi untuk renovasi madrasah setempat.'},
+      {id:7,title:'Kegiatan Kaderisasi Ranting Melong',date:'2025-09-20',cat:'kegiatan',tags:['kader','ranting'],img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_z9KS0vvUrm8CPZVO3bakJchUKzYMH9Wqxw&s',excerpt:'Ranting Melong mengadakan kegiatan kaderisasi lokal.'}
+    ];
+
+    const perPage = 6;
+    let currentPage = 1;
+    let currentFilter = 'all';
+    let currentQuery = '';
+    let activeTag = null;
+
+    function computeTagStats(list){
+      const counts = {};
+      list.forEach(a=>{
+        if(!Array.isArray(a.tags)) return;
+        a.tags.forEach(t=>{
+          const key = t.trim().toLowerCase();
+          counts[key] = (counts[key]||0)+1;
+        });
+      });
+      return counts;
+    }
+
+    function renderTrendingTags(){
+      const stats = computeTagStats(sampleArticles);
+      const entries = Object.entries(stats).sort((a,b)=>b[1]-a[1]); // descending by count
+      const container = document.getElementById('trendingTags');
+      container.innerHTML = '';
+
+      if(entries.length===0){ container.innerHTML = '<div class="muted">Belum ada tag.</div>'; return; }
+
+      // determine sizes based on max count to create simple tag cloud effect
+      const maxCount = entries[0][1];
+      entries.forEach(([tag,count])=>{
+        // size classes 1..4
+        const ratio = count / maxCount;
+        let sizeClass = 'tag-size-1';
+        if(ratio > 0.75) sizeClass = 'tag-size-4';
+        else if(ratio > 0.5) sizeClass = 'tag-size-3';
+        else if(ratio > 0.25) sizeClass = 'tag-size-2';
+
+        const btn = document.createElement('button');
+        btn.className = `tag-btn ${sizeClass}`;
+        btn.dataset.tag = tag;
+        btn.innerHTML = `<span class="tag-label">${tag}</span><span class="tag-count">(${count})</span>`;
+        if(activeTag && activeTag === tag) btn.classList.add('active');
+
+        btn.addEventListener('click', ()=>{
+          if(activeTag === tag){ activeTag = null; currentPage=1; }
+          else { activeTag = tag; currentPage=1; currentFilter='all'; document.getElementById('filterCategory').value='all'; }
+          // toggle active visual
+          document.querySelectorAll('.tag-btn').forEach(x=>x.classList.remove('active'));
+          if(activeTag) btn.classList.add('active');
+          renderArticles();
+        });
+
+        container.appendChild(btn);
+      });
+    }
+
+    function renderSlidesAndTags(){
+      renderSlides();
+      renderTrendingTags();
+    }
+
+    function renderArticles(){
+      const container = document.getElementById('articles');
+      container.innerHTML = '';
+
+      let list = sampleArticles.slice();
+      if(currentFilter!=='all') list = list.filter(a=>a.cat===currentFilter);
+      if(activeTag) list = list.filter(a=> Array.isArray(a.tags) && a.tags.map(t=>t.toLowerCase()).includes(activeTag));
+      if(currentQuery.trim()){
+        const q = currentQuery.toLowerCase();
+        list = list.filter(a=> a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) || (a.tags && a.tags.join(' ').toLowerCase().includes(q)));
+      }
+
+      const total = list.length;
+      const start = (currentPage-1)*perPage;
+      const pageItems = list.slice(start,start+perPage);
+
+      if(pageItems.length===0){
+        container.innerHTML = '<div class="card">Tidak ada berita yang sesuai.</div>';
+        renderPagination(total);
+        renderTrendingTags(); // update tag counts even when filtered
+        return;
+      }
+
+      pageItems.forEach(a=>{
+        const art = document.createElement('article'); art.className='card news-card';
+        // show tags under excerpt
+        const tagsHtml = (a.tags || []).map(t=>`<span class="k-pill" style="background:rgba(32,123,53,0.06);font-weight:600">${t}</span>`).join(' ');
+        art.innerHTML = `<img src="${a.img}" alt="${a.title}"><div class="news-meta">${formatDate(a.date)} • ${capitalize(a.cat)}</div><h3 style="margin-bottom:6px">${a.title}</h3><p class="muted">${a.excerpt}</p><div style="margin-top:8px">${tagsHtml}</div><a href="#" data-id="${a.id}" class="read-more" style="display:inline-block;margin-top:10px">Baca Selengkapnya →</a>`;
+        container.appendChild(art);
+      });
+
+      renderPagination(total);
+      attachReadMore();
+      renderTrendingTags(); // refresh tag list (counts reflect all articles, but you may change to reflect filtered list if desired)
+    }
+
+    function renderPagination(total){
+      const pag = document.getElementById('pagination');
+      pag.innerHTML = '';
+      const pages = Math.max(1, Math.ceil(total/perPage));
+      for(let i=1;i<=pages;i++){
+        const b = document.createElement('button'); b.textContent = i; if(i===currentPage) b.style.fontWeight='700';
+        b.addEventListener('click', ()=>{ currentPage=i; renderArticles(); });
+        pag.appendChild(b);
+      }
+    }
+
+    function attachReadMore(){
+      document.querySelectorAll('.read-more').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          e.preventDefault(); const id = btn.dataset.id; const article = sampleArticles.find(x=>x.id==id);
+          if(article){ showArticleModal(article); }
+        })
+      })
+    }
+
+    function showArticleModal(article){
+      const modal = document.getElementById('modalContact');
+      const dialog = modal.querySelector('.dialog');
+      const tagsHtml = (article.tags || []).map(t=>`<span class="k-pill" style="background:rgba(32,123,53,0.06);font-weight:600;margin-right:6px">${t}</span>`).join('');
+      dialog.innerHTML = `<h3>${article.title}</h3><div class="meta-row">${formatDate(article.date)} • ${capitalize(article.cat)}</div><img src="${article.img}" style="margin-top:12px;border-radius:8px"><div style="margin-top:12px">${tagsHtml}</div><p style="margin-top:12px">${article.excerpt}</p><div style="display:flex;justify-content:flex-end;margin-top:12px"><button id="closeArticle" class="btn">Tutup</button></div>`;
+      modal.classList.add('open');
+      document.getElementById('closeArticle')?.addEventListener('click', ()=> modal.classList.remove('open'));
+    }
+
+    function formatDate(d){
+      try{ const dt = new Date(d); const opts = {day:'2-digit',month:'short',year:'numeric'}; return dt.toLocaleDateString('id-ID', opts).replace('.', '') }
+      catch(e){ return d }
+    }
+    function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1) }
+
+    // search & filter
+    document.getElementById('searchBtn').addEventListener('click', ()=>{ currentQuery = document.getElementById('search').value; currentPage=1; renderArticles(); });
+    document.getElementById('filterCategory').addEventListener('change', (e)=>{ currentFilter = e.target.value; currentPage=1; activeTag = null; renderArticles(); });
+
+    // quick category links
+    document.querySelectorAll('[data-cat]').forEach(el=> el.addEventListener('click', e=>{ e.preventDefault(); currentFilter = el.dataset.cat; document.getElementById('filterCategory').value = currentFilter; currentPage=1; activeTag=null; renderArticles(); }));
+
+    // clear tag filter
+    document.getElementById('clearTag').addEventListener('click', ()=>{
+      activeTag = null;
+      document.querySelectorAll('.tag-btn').forEach(x=>x.classList.remove('active'));
+      renderArticles();
+    });
+
+    // initial render
+    renderSlidesAndTags();
+    renderArticles();
+
+    /* --------------- CONTACT MODAL --------------- */
+    const modal = document.getElementById('modalContact');
+    const openContact2 = document.getElementById('openContact2');
+    const closeModal = document.getElementById('closeModal');
+    openContact2?.addEventListener('click', ()=> modal.classList.add('open'));
+    closeModal?.addEventListener('click', ()=> modal.classList.remove('open'));
+    modal?.addEventListener('click', e => { if(e.target===modal) modal.classList.remove('open'); });
+
+    document.getElementById('contactForm')?.addEventListener('submit', e=>{
+      e.preventDefault(); alert('Terima kasih! Pesan Anda telah dikirim.'); modal.classList.remove('open'); e.target.reset();
+    });
+
+    /* --------------- BACK TO TOP --------------- */
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{ window.scrollY>300 ? toTop.classList.add('show') : toTop.classList.remove('show'); });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+    /* --------------- UTIL ---------------- */
+    // Replace placeholder images if none exist to avoid broken images
+    document.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('error', ()=>{ img.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="%23f3f3f3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23999" font-size="18">Gambar belum tersedia</text></svg>' });
+    });
+
+  </script>
+</body>
+</html>
